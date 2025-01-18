@@ -1,7 +1,7 @@
 /* define constants up here */
 :root {
   --banner-bg-start: #fff9ea;
-  --banner-bg-end: #e3e3e3;
+  --banner-bg-end: #163a96;
   --produce-gray: #e4e4e4;
   --search-text-gray: #949494;
   --search-gray: #f2f2f2;
@@ -56,7 +56,7 @@ body {
 }
 #banner-subtitle {
   font-family: 'Roboto Condensed', sans-serif;
-  color: #f3cdd3;
+  color: #163a96;
   font-size: 12px;
 }
 
