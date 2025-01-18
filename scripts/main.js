@@ -69,7 +69,7 @@ trainee: {
   image: ...
   selected: false/true // whether user selected them
   eliminated: false/true
-  top12: false/true
+  top9: false/true
 }
 */
 function convertCSVArrayToTraineeData(csvArrays) {
@@ -90,7 +90,7 @@ function convertCSVArrayToTraineeData(csvArrays) {
     trainee.top9 = traineeArray[6] === 't'; // sets trainee to top 9 if 't' appears in 6th column
     trainee.id = parseInt(traineeArray[7]) - 1; // trainee id is the original ordering of the trainees in the first csv
     trainee.image =
-      trainee.name_romanized.replace(" ", "").replace("-", "") + ".jpg";
+      trainee.name_romanized.replace(" ", "").replace("-", "") + ".png";
     return trainee;
   });
   filteredTrainees = trainees;
