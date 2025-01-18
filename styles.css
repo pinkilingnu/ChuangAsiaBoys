@@ -1,7 +1,7 @@
 /* define constants up here */
 :root {
-  --banner-bg-start: #fd5e6d;
-  --banner-bg-end: #ef5079;
+  --banner-bg-start: #fff9ea;
+  --banner-bg-end: #e3e3e3;
   --produce-gray: #e4e4e4;
   --search-text-gray: #949494;
   --search-gray: #f2f2f2;
@@ -14,12 +14,12 @@
   --checked-blue: #052ae2CC;
 
   /* ranking border colors */
-  --a-rank: #fb4a8c;
-  --b-rank: #fc840c;
-  --c-rank: #ffc407;
-  --d-rank: #19b468;
-  --f-rank: #a6a6a4;
-  --no-rank: #707070;
+  --a-rank: #8fb7ff;
+  --b-rank: #8fb7ff;
+  --c-rank: #8fb7ff;
+  --d-rank: #8fb7ff;
+  --f-rank: #8fb7ff;
+  --no-rank: #8fb7ff;
 }
 
 p {
