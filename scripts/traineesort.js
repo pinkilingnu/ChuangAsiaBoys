@@ -63,7 +63,7 @@ function showEliminatedClick(event) {
   rerenderRanking();
 }
 
-function showTop9Click(event) {
+function show9Click(event) {
   let checkbox = event.target;
   if (checkbox.checked) {
     showTop9 = true;
