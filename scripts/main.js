@@ -307,13 +307,22 @@ function tableClicked(trainee) {
 
 // Event handler for ranking
 function rankingClicked(trainee) {
-	if (trainee.selected) {
+  if (trainee.selected === undefined) {
+    trainee.selected = false;  // กำหนดค่าเริ่มต้นให้ selected ถ้ายังไม่ถูกกำหนด
+  }
+
+  if (trainee.selected) {
     trainee.selected = !trainee.selected;
     // Remove the trainee from the ranking
     removeRankedTrainee(trainee);
+  } else {
+    trainee.selected = !trainee.selected;
+    // Add the trainee to the ranking (หากต้องการเพิ่มให้ในอันดับ)
+    addRankedTrainee(trainee);
   }
+
   rerenderTable();
-	rerenderRanking();
+  rerenderRanking();
 }
 
 function swapTrainees(index1, index2) {
