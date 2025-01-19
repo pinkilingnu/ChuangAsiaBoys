@@ -389,7 +389,10 @@ function filterTrainees(event) {
     }
     return initialMatch || alternateMatch;
   });
+  // Make sure filtered results are sorted
   filteredTrainees = sortedTrainees(filteredTrainees);
+
+  // Re-render the table with the filtered trainees
   rerenderTable();
 }
 
