@@ -70,7 +70,7 @@ trainee: {
   image: ...
   selected: false/true // whether user selected them
   eliminated: false/true
-  top7: false/true
+  top9: false/true
 }
 */
 function convertCSVArrayToTraineeData(csvArrays) {
@@ -87,10 +87,10 @@ function convertCSVArrayToTraineeData(csvArrays) {
     trainee.affiliation = traineeArray[3];
     trainee.nationality = traineeArray [4];
     trainee.rating = traineeArray[5];
-    trainee.birthyear = traineeArray[5];
-    trainee.eliminated = traineeArray[6] === 'e'; // sets trainee to be eliminated if 'e' appears in 7th col
+    trainee.birthyear = traineeArray[6];
+    trainee.eliminated = traineeArray[7] === 'e'; // sets trainee to be eliminated if 'e' appears in 7th col
     trainee.top7 = traineeArray[7] === 't'; // sets trainee to top 7 if 't' appears in 7th column
-    trainee.id = parseInt(traineeArray[7]) - 1; // trainee id is the original ordering of the trainees in the first csv
+    trainee.id = parseInt(traineeArray[8]) - 1; // trainee id is the original ordering of the trainees in the first csv
     trainee.image =
       trainee.stage_name.replaceAll(" ", "", ".").replaceAll("-", "", "_") + ".png";
     return trainee;
@@ -187,7 +187,7 @@ function populateTableEntry(trainee) {
       <img class="table__entry-img" src="assets/trainees/${trainee.image}" />
       <div class="table__entry-icon-border ${trainee.rating.toLowerCase()}-rank-border"></div>
       ${
-        top7 ? '<div class="table__entry-icon-thingy"></div>' : ''
+        top9 ? '<div class="table__entry-icon-thingy"></div>' : ''
       }
       ${
         trainee.selected ? '<img class="table__entry-check" src="assets/check.png"/>' : ""
