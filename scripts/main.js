@@ -307,22 +307,13 @@ function tableClicked(trainee) {
 
 // Event handler for ranking
 function rankingClicked(trainee) {
-  if (trainee.selected === undefined) {
-    trainee.selected = false;  // กำหนดค่าเริ่มต้นให้ selected ถ้ายังไม่ถูกกำหนด
-  }
-
-  if (trainee.selected) {
+	if (trainee.selected) {
     trainee.selected = !trainee.selected;
     // Remove the trainee from the ranking
     removeRankedTrainee(trainee);
-  } else {
-    trainee.selected = !trainee.selected;
-    // Add the trainee to the ranking (หากต้องการเพิ่มให้ในอันดับ)
-    addRankedTrainee(trainee);
   }
-
   rerenderTable();
-  rerenderRanking();
+	rerenderRanking();
 }
 
 function swapTrainees(index1, index2) {
@@ -338,50 +329,39 @@ function swapTrainees(index1, index2) {
 // <original> is the original name as appearing on csv
 // all of it should be lower case
 const alternateRomanizations = {
-  'acare': ['eclair'],
-  'akina': ['faky'],
-  'ánh sáng': ['anh sang', 'anhsang', 'sgo48', '48'],
-  'caith': ['jkt48', '48'],
-  'coco': ['koko'],
-  'devi': ['jkt48', '48'],
-  'duna': ['csr'],
-  'emma': ['zhu yimeng', 'yimeng', 'zhu yi meng', 'yi meng'],
-  'geumhee': ['csr'],
-  'grace': ['mindy'],
-  'ilene': ['mindy'],
-  'j jazzsper': ['jazzsper', 'bear knuckle'],
-  'kittie': ['bian tian yu', 'bian tianyu', 'tian yu', 'tianyu'],
-  'liliana li': ['li shitian', 'li shi tian', 'shitian', 'shi tian'],
-  'ma liya': ['maliya', 'maria'],
-  'mamcù': ['mamcu', 'manchu'],
-  'mingming': ['mindy', 'celeste'],
-  'p.amp': ['pam', 'pamp', 'p amp'],
-  'panda': ['pink panda'],
-  'pangjang': ['mindy'],
-  'pream': ['celeste'],
-  'rei': ['girls planet 999', 'gp999', 'revy'],
-  'rinka': ['girls planet 999', 'gp999'],
-  'ruan': ['girls planet 999', 'gp999', 'kiss girls'],
-  'seoyeon': ['csr'],
-  'si yang': ['betty', 'zhong si yang', 'zhong siyang'],
-  'wang ke': ['aim', 'howz', 'produce 48', 'pd48', 'produce48'],
-  'xuanning': ['tian xuan ning', 'tian xuanning'],
-  'xueyao': ['shadow', 'zeng xueyao', 'zeng xue yao', 'chuang 2020', 'produce camp 2020'],
-  'xin meng': ['xinmeng', 'qiao xinmeng', 'qiao xin meng'],
-  'yeham': ['csr'],
-  'yuan ke': ['moko'],
-  'zoi': ['zoya']
+  'heo yunjin': ['heo yoonjin', 'huh yoonjin', 'huh yunjin'],
+  'go yujin': ['ko yoojin', 'ko yujin', 'go yoojin'],
+  'kim yubin': ['kim yoobin'],
+  'lee yoojun': ['lee yujeong'],
+  'shin suhyun': ['shin soohyun', 'shin soohyeon', 'shin suhyeon'],
+  'jo ahyoung': ['cho ahyoung', 'cho ahyeong'],
+  'yu minyoung': ['yoo minyeong', 'yu minyeong', 'yoo minyoung'],
+  'park haeyoon': ['park haeyun'],
+  'park jinhee': ['jinny park'],
+  'jo sarang': ['cho sarang'],
+  'park chanju': ['park chanjoo'],
+  'lee gaeun': ['lee kaeun'],
+  'na goeun': ['na koeun'],
+  'ahn yujin': ['ahn yoojin'],
+  'jo gahyun': ['cho gahyun', 'jo kahyun', 'cho kahyun', 'jo kahyeon', 'cho kahyeon'],
+  'jo yuri': ['cho yuri'],
+  'yoon haesol': ['yun haesol'],
+  'kim minju': ['kim minjoo'],
+  'lee seunghyun': ['lee seunghyeon'],
+  'jo yeongin': ['cho yeongin', 'cho youngin', 'jo youngin'],
+  'kim suyun': ['kim sooyoon'],
+  'kim sihyun': ['kim shihyun', 'kim sihyeon']
 };
 
 // uses the current filter text to create a subset of trainees with matching info
 function filterTrainees(event) {
   let filterText = event.target.value.toLowerCase();
-  // filters trainees based on name, alternate names, affiliation, nationality and birth year
+  // filters trainees based on name, alternate names, and company
   filteredTrainees = trainees.filter(function (trainee) {
-    let initialMatch = includesIgnCase(trainee.stage_name, filterText) || includesIgnCase (trainee.affiliation, filterText) || includesIgnCase (trainee.birthyear, filterText) || includesIgnCase (trainee.nationality, filterText);
+    let initialMatch = includesIgnCase(trainee.name_romanized, filterText) || includesIgnCase(trainee.company, filterText);
     // if alernates exists then check them as well
     let alternateMatch = false;
-    let alternates = alternateRomanizations[trainee.stage_name.toLowerCase()]
+    let alternates = alternateRomanizations[trainee.name_romanized.toLowerCase()]
     if (alternates) {
       for (let i = 0; i < alternates.length; i++) {
         alternateMatch = alternateMatch || includesIgnCase(alternates[i], filterText);
@@ -389,10 +369,7 @@ function filterTrainees(event) {
     }
     return initialMatch || alternateMatch;
   });
-  // Make sure filtered results are sorted
   filteredTrainees = sortedTrainees(filteredTrainees);
-
-  // Re-render the table with the filtered trainees
   rerenderTable();
 }
 
@@ -422,7 +399,7 @@ function removeRankedTrainee(trainee) {
   return false;
 }
 
-const currentURL = "https://chuangasias2.github.io/ChuangAsiaBoy/";
+const currentURL = "https://chuangasias2.github.io/ChuangAsiaBoy/?r=LTEtMS0xLTEtMS0xLTE=";
 // Serializes the ranking into a string and appends that to the current URL
 function generateShareLink() {
   let shareCode = ranking.map(function (trainee) {
