@@ -76,23 +76,22 @@ trainee: {
 function convertCSVArrayToTraineeData(csvArrays) {
   trainees = csvArrays.map(function(traineeArray, index) {
     trainee = {};
-    trainee.stage_name = traineeArray[0];
+    trainee.name_romanized = traineeArray[0];
     if (traineeArray[2] === "-") {
-      // trainee only has one name
-      trainee.name_native = traineeArray[1];
+      // trainee only has hangul
+      trainee.name_hangul = traineeArray[1];
     } else {
-      trainee.name_native = traineeArray[1];
-      trainee.name_romanized = traineeArray[2];
+      trainee.name_japanese = traineeArray[1];
+      trainee.name_hangul = traineeArray[2];
     }
-    trainee.affiliation = traineeArray[3];
-    trainee.nationality = traineeArray [4];
-    trainee.rating = traineeArray[5];
-    trainee.birthyear = traineeArray[6];
-    trainee.eliminated = traineeArray[7] === 'e'; // sets trainee to be eliminated if 'e' appears in 7th col
-    trainee.top7 = traineeArray[7] === 't'; // sets trainee to top 7 if 't' appears in 7th column
-    trainee.id = parseInt(traineeArray[8]) - 1; // trainee id is the original ordering of the trainees in the first csv
+    trainee.company = traineeArray[3];
+    trainee.grade = traineeArray[4];
+    trainee.birthyear = traineeArray[5];
+    trainee.eliminated = traineeArray[6] === 'e'; // sets trainee to be eliminated if 'e' appears in 6th col
+    trainee.top7 = traineeArray[6] === 't'; // sets trainee to top 7 if 't' appears in 4th column
+    trainee.id = parseInt(traineeArray[7]) - 1; // trainee id is the original ordering of the trainees in the first csv
     trainee.image =
-      trainee.stage_name.replaceAll(" ", "", ".").replaceAll("-", "", "_") + ".png";
+      trainee.name_romanized.replace(" ", "").replace("-", "") + ".jpg";
     return trainee;
   });
   filteredTrainees = trainees;
