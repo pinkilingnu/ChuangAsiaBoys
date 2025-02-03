@@ -187,7 +187,7 @@ function populateTableEntry(trainee) {
       <img class="table__entry-img" src="assets/trainees/${trainee.image}" />
       <div class="table__entry-icon-border ${trainee.rating.toLowerCase()}-rank-border"></div>
       ${
-        top9 ? '<div class="table__entry-icon-thingy"></div>' : ''
+        top7 ? '<div class="table__entry-icon-thingy"></div>' : ''
       }
       ${
         trainee.selected ? '<img class="table__entry-check" src="assets/check.png"/>' : ""
