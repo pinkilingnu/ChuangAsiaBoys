@@ -257,8 +257,6 @@ const abbreviatedNationalities = {
   "JAPAN/AUSTRALIA": "JPN/AUS 🇯🇵🇦🇺"
 }
 
-function populateRankingEntry(trainee, currRank) {
-  let modifiedNationality = trainee.nationality.toUpperCase();
   let eliminated = (showEliminated && trainee.eliminated) && "eliminated";
   let top7 = (showTop7 && trainee.top7) && "top7";
   const rankingEntry = `
